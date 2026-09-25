@@ -5,19 +5,19 @@
 # uses CMake
 
 # define the version
-VER=d20add35bcfc9932671cab9ad786b24fd320a592
+VER=b61e12c43324b9a8c34aaff2795091187f21cba5
 
 # tools for git use
 GIT_URL="https://github.com/hmatuschek/eigen3-nnls.git"
 GIT_TAG=$VER
 
-FORMULA_TYPES=( "osx" "linux64")
+FORMULA_TYPES=( "osx" "linux64" "linuxaarch64" )
 
 # download the source code and unpack it into LIB_NAME
 function download() {
-    git clone --depth=1 ${GIT_URL} eigen3-nnls/
+    git clone ${GIT_URL} eigen3-nnls/
     cd eigen3-nnls/
-    git checkout -b ${GIT_TAG}
+    git -c advice.detachedHead=false checkout ${GIT_TAG}
 }
 
 # prepare the build environment, executed inside the lib src dir
@@ -39,8 +39,7 @@ function copy() {
     fi
 
     mkdir -p $1/include
-
-    cp -r src/ $1/include
+    cp src/nnls.h $1/include/
 
 }
 
