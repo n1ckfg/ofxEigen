@@ -5,19 +5,18 @@
 # uses CMake
 
 # define the version
-VER=dde02fceedfc1ba09d4d4f71a2b5dafcfcb85491
+VER=5.0.1
 
 # tools for git use
-GIT_URL="https://github.com/eigenteam/eigen-git-mirror.git"
+GIT_URL="https://gitlab.com/libeigen/eigen.git"
 GIT_TAG=$VER
 
-FORMULA_TYPES=( "osx" "linux64")
+FORMULA_TYPES=( "osx" "linux64" "linuxaarch64" )
 
 # download the source code and unpack it into LIB_NAME
 function download() {
-    git clone --depth=1 ${GIT_URL} eigen3/
+    git clone --depth=1 --branch ${GIT_TAG} ${GIT_URL} eigen3/
     cd eigen3/
-    git checkout -b ${GIT_TAG}
 }
 
 # prepare the build environment, executed inside the lib src dir
